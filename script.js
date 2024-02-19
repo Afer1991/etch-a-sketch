@@ -1,6 +1,11 @@
 const container = document.querySelector('.container');
 const gridSize = document.querySelector('#grid-size');
+const colorPicker = document.querySelector('#color-picker');
+const color = document.querySelector('#color');
+const random = document.querySelector('#random');
+const darker = document.querySelector('#darker');
 
+// Create grid
 for (let i = 0; i < 16; i++) {
   let row = document.createElement('div');
   row.classList.add('row');
@@ -16,11 +21,14 @@ const cells = document.querySelectorAll('.cell');
 
 for (let j = 0; j < cells.length; j++) {
   cells[j].addEventListener('mouseover', () => {
-    cells[j].style.backgroundColor = '#000';
+    cells[j].style.backgroundColor = colorPicker.value;
   });
 }
 
+// Initialize buttons
 gridSize.onclick = updateGridSize;
+color.onclick = pickColor;
+random.onclick = randomColor;
 
 function updateGridSize() {
   const updatedGridSize = prompt("Enter a grid Size (Max: 100, Min: 16):");
@@ -48,7 +56,30 @@ function newGridSize(num) {
   const cells = document.querySelectorAll('.cell');
   for (let j = 0; j < cells.length; j++) {
     cells[j].addEventListener('mouseover', () => {
-      cells[j].style.backgroundColor = '#000';
+      cells[j].style.backgroundColor = colorPicker.value;
     });
   }
 } 
+
+function pickColor() {
+  for (let j = 0; j < cells.length; j++) {
+    cells[j].addEventListener('mouseover', () => {
+      cells[j].style.backgroundColor = colorPicker.value;
+    });
+  }
+}
+
+function randomColor() {
+  const cells = document.querySelectorAll('.cell');
+  function randomNumber() {
+    const colorNumber = Math.floor(Math.random() * 256);
+    return colorNumber;
+  }
+  for (let j = 0; j < cells.length; j++) {
+    cells[j].addEventListener('mouseover', () => {
+      cells[j].style.backgroundColor = `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`;
+    });
+  }
+}
+
+
